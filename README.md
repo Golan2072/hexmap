@@ -5,5 +5,8 @@ This code is Open Source.
 
 Version History:
 
+v0.1 - February 16th, 2021
+- More complete code with larger hexagons and numerous bug fixes. Still requires thorough debugging.
+
 v0.1 - February 15th, 2021
 - Initial code upload. Very partial code, very buggy. Uses placeholder data rather than procedurally generated/JSON/SEC data.
