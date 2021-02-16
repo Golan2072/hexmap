@@ -5,6 +5,9 @@ This code is Open Source.
 
 Version History:
 
+v0.4 - February 16th, 2021
+- The starmap is now a string produced by a function, for increased versatility.
+
 v0.3 - February 16th, 2021
 - Major bug fixes. All columns work as intended.
 
