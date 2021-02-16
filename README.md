@@ -5,7 +5,10 @@ This code is Open Source.
 
 Version History:
 
-v0.1 - February 16th, 2021
+v0.2.1 - February 16th, 2021
+- Further bug fixes. Odd columns work as intended. Even columns are bugged.
+
+v0.2 - February 16th, 2021
 - More complete code with larger hexagons and numerous bug fixes. Still requires thorough debugging.
 
 v0.1 - February 15th, 2021
