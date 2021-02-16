@@ -5,6 +5,9 @@ This code is Open Source.
 
 Version History:
 
+v0.5 - February 16th, 2021
+- Now including 7-letter world names.
+
 v0.4 - February 16th, 2021
 - The starmap is now a string produced by a function, for increased versatility.
 
