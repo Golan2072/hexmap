@@ -5,6 +5,9 @@ This code is Open Source.
 
 Version History:
 
+v0.3 - February 16th, 2021
+- Major bug fixes. All columns work as intended.
+
 v0.2.1 - February 16th, 2021
 - Further bug fixes. Odd columns work as intended. Even columns are bugged.
 
