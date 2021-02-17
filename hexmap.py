@@ -1,7 +1,7 @@
 # Hexagon Map Test.
 
 import stellagama
-
+import json
 
 class World:
     def __init__(self, worldtype, gas_giant, starport, naval, scout, names):
@@ -11,6 +11,49 @@ class World:
         self.naval = naval
         self.scout = scout
         self.names = names.upper()
+
+
+def read_json_subsector(jsonfile):
+    starmap = blank_map()
+    with open (jsonfile, 'r') as subsector:
+        data = json.load(subsector)
+        for column in data:
+            for row in data[column]:
+                if row in data[column]:
+                    if data[column][row]["hydrographics"] > 0:
+                        world_type = "@"
+                    elif data[column][row]["size"] == 0:
+                        world_type = "#"
+                    else:
+                        world_type = "O"
+                    if data[column][row]["gas_giants"] == "G":
+                        gas_giant = "*"
+                    else:
+                        gas_giant = " "
+                    if data[column][row]["base"] == "N":
+                        naval_base = "*"
+                    else:
+                        naval_base = " "
+                    if data[column][row]["base"] == "S":
+                        scout_base = "^"
+                    else:
+                        scout_base = "_"
+                    starmap[int(column)][int(row)] = World(world_type, gas_giant, data[column][row]["starport"] , naval_base, scout_base, "       ")
+                else:
+                    starmap[int(column)][int(row)] = World(" ", " ", " ", " ", "_", "       ")
+                # starmap[int(column)][int(row)] = World(world_type, gas_giant, row["starport"] , naval_base, scout_base, "       ")
+#          for line in subsector_reader:
+
+#             hex_converter ={"00": 0, "01": 1, "02": 2, "03": 3, "04": 4, "05": 5, "06": 6, "07": 7, "08": 8, "09": 9, "10": 10}
+#             column_number = hex_converter[line[0]]
+#             row_number = hex_converter[line[1]]
+#             starmap[column_number] ={}
+#             starmap[column_number][row_number] = World(world_type, gas_giant, line[3], naval_base, scout_base, line[2])
+    for column in starmap:
+        for row in starmap[column]:
+            if row not in starmap[column]:
+                starmap[column][row] = World(" ", " ", " ", " ", "_", "       ")
+    return starmap
 
 
 def blank_map():
@@ -61,7 +104,7 @@ def even_row(column, row):
 def starmap_string(starmap):
     global row
     stellagama.clear_screen()
-    star_string = f"HEXACORP NEUROCORE OS v.21.1\nDecember 21st 2221 11:32AM\n\nS T A R M A P  V I E W\n\n {base_row('  _____       ')}\n"
+    star_string = f" UNIVERSAL OS v.21.1\n\n A U T O N O M O U S    R E G I O N\n\n {base_row('  _____       ')}\n"
 
     for row in range(1, 11):
         star_string += f"  /  {starmap[1][row].starport} {starmap[1][row].gas_giant}\{starmap[2][row-1].names}/  {starmap[3][row].starport} {starmap[3][row].gas_giant}\{starmap[4][row-1].names}/  {starmap[5][row].starport} {starmap[5][row].gas_giant}\{starmap[6][row-1].names}/  {starmap[7][row].starport} {starmap[7][row] .gas_giant}\{starmap[8][row-1].names}/ \n"
@@ -74,42 +117,4 @@ def starmap_string(starmap):
 
 
 if __name__ == "__main__":
-    starmap = blank_map()
-    starmap[1][1] = World("O", "*", "E", " ", "^", "Solstic")
-    starmap[1][4] = World("@", " ", "B", "*", "_", "Helena ")
-    starmap[1][5] = World("@", "*", "B", " ", "_", "Persepo")
-    starmap[1][6] = World("@", "*", "C", " ", "_", "Tanith ")
-    starmap[1][10] = World("@", " ", "D", " ", "^", "Armaged")
-    starmap[2][3] = World("@", "*", "C", " ", "_", "Solomon")
-    starmap[2][5] = World("O", "*", "C", " ", "^", "Cyclops")
-    starmap[2][8] = World("O", "*", "D", " ", "_", "Retribu")
-    starmap[2][9] = World("@", "*", "B", " ", "_", "Priam  ")
-    starmap[2][10] = World("@", "*", "E", " ", "_", "Morrow ")
-    starmap[3][5] = World("O", "*", "E", " ", "_", "Labyrin")
-    starmap[3][6] = World("@", "*", "A", "*", "_", "Orpheus")
-    starmap[3][8] = World("@", "*", "C", " ", "_", "Lucifer")
-    starmap[3][9] = World("@", "*", "E", " ", "_", "Theta T")
-    starmap[4][1] = World("@", " ", "C", "%", "_", "Lantau ")
-    starmap[4][4] = World("O", "*", "E", " ", "_", "Monumen")
-    starmap[4][4] = World("@", "*", "B", " ", "_", "Centenn")
-    starmap[5][2] = World("@", "*", "E", " ", "_", "Paradis")
-    starmap[5][4] = World("@", " ", "C", " ", "_", "Midas  ")
-    starmap[5][8] = World("O", " ", "X", " ", "_", "LV 508 ")
-    starmap[6][1] = World("O", "*", "D", " ", "_", "Ha Long")
-    starmap[6][2] = World("@", "*", "C", "*", "^", "Hexis  ")
-    starmap[6][4] = World("@", "*", "X", " ", "_", "LV 604 ")
-    starmap[6][6] = World("@", " ", "E", " ", "_", "Gamma T")
-    starmap[6][8] = World("#", "*", "C", " ", "_", "Telamon")
-    starmap[6][10] = World("@", " ", "X", " ", "_", "LV 610 ")
-    starmap[7][2] = World("#", " ", "B", " ", "_", "Diomede")
-    starmap[7][3] = World("O", "*", "D", " ", "_", "Sterlin")
-    starmap[7][4] = World("@", "*", "E", " ", "_", "Delta T")
-    starmap[7][7] = World("O", "*", "X", " ", "_", "LV 707 ")
-    starmap[7][9] = World("O", "*", "D", " ", "_", "Forge  ")
-    starmap[7][10] = World("@", "*", "E", " ", "_", "Absolom")
-    starmap[8][5] = World("O", " ", "E", " ", "_", "Nemesis")
-    starmap[8][10] = World("@", "*", "X", " ", "_", "LV 810 ")
-
-    with open('1977.txt', 'w') as text_starmap:
-        text_starmap.write(starmap_string(starmap))
-    print("file saved")
+    print(starmap_string(read_json_subsector("1.json")))
