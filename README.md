@@ -5,6 +5,9 @@ This code is Open Source.
 
 Version History:
 
+v0.6 - February 17th, 2021
+- Function added to read JSON files produced by my WorldGen script with Cepheus Light world data and generate a map accordingly. File loading interface not implemented yet, so this uses a placeholder file.
+
 v0.5 - February 16th, 2021
 - Now including 7-letter world names.
 
