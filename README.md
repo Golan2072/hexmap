@@ -5,6 +5,12 @@ This code is Open Source.
 
 Version History:
 
+v0.7 - February 19th, 2021
+- Command line interface added, format:
+python hexmap.py [input file] [output file]
+where "input file" is the JSON file to be processed into a hexmap and "output file" is the output txt file.
+Please include extewnsions in filenames.
+
 v0.6 - February 17th, 2021
 - Function added to read JSON files produced by my WorldGen script with Cepheus Light world data and generate a map accordingly. File loading interface not implemented yet, so this uses a placeholder file.
 
