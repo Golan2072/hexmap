@@ -17,10 +17,10 @@ def yn():
     while query == 1:
         answer = input("Y/N: ")
         if answer.lower() == "y":
-            return "yes"
+            return True
             break
         if answer.lower() == "n":
-            return "no"
+            return False
             break
         else:
             print("Invalid Answer")
@@ -52,8 +52,7 @@ def current_dir():
 
 
 def check_file_exists(check_file):
-
-    if check_file in os.listdir():
+    if check_file in current_dir():
         file_exists = True
     else:
         file_exists = False
@@ -63,17 +62,29 @@ def check_file_exists(check_file):
 def savefile(extension):
     filename = str(input("Please enter file name to generate: "))
     filecheck = filename + "." + extension
-    save = 1
     if check_file_exists(filecheck):
         print(" ")
         print("File already exists. Overwrite?")
         overwrite = yn()
         if overwrite == "y":
-            save = 0
+            return filename
         if overwrite == "n":
             filename = input("Please enter new file name to generate: ")
-    filename = filename + "." + extension
     return filename
+
+
+
+def savefile_command_line(file):
+    if check_file_exists(file):
+        print("\nFile already exists. Overwrite?")
+        overwrite = yn()
+        if overwrite:
+            return file
+        if not overwrite:
+            filename = input("Please enter new file name to generate: ")
+            return filename
+    else:
+        return file
 
 
 def clear_screen():
