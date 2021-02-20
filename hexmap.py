@@ -108,6 +108,34 @@ def starmap_string(starmap):
     return star_string
 
 
+def starmap_string_v2(starmap):
+    global row
+    # stellagama.clear_screen()
+    star_string = f" UNIVERSAL OS v.21.1\n\n A U T O N O M O U S    R E G I O N\n\n {base_row('  _____       ')}\n"
+    
+    # Convert starmap to preliminary format.
+    # Format is a 3d array, Row, Column, Line
+    printmap = [[[] for i in range(8)] for j in range(10)]
+    
+    for row in range(1,11):
+        for column in range(1,9):
+            printmap[row][column][1] = f"  {starmap[column][row].starport} {starmap[column][row].gas_giant}"
+            printmap[row][column][2] = f"{starmap[column][row].naval}  {starmap[column][row].worldtype}   "
+            printmap[row][column][3] = f"{starmap[column][row].names}"
+            printmap[row][column][4] = f"{starmap[column][row].scout}{hex_number(column, row, starmap[column][row].worldtype)}"
+    
+
+    # Each cell has 4 lines with 5,7,7,5 cells.
+    for row in range(1, 11):
+        star_string += f"  /{printmap[row][1][1]}\{printmap[row-1][2][3]}/{printmap[row][3][1]}\{printmap[row-1][4][3]}/{printmap[row][5][1]}\{printmap[row-1][6][3]}/{printmap[row][7][1]}\{printmap[row-1][8][3]}/ \n"
+        star_string += f" /{printmap[row][1][2]}\{printmap[row-1][2][4]}/{printmap[row][3][2]}\{printmap[row-1][4][4]}/{printmap[row][5][2]}\{printmap[row-1][6][4]}/{printmap[row][7][2]}\{printmap[row-1][8][4]}/ \n"
+        star_string += f" \{printmap[row][1][3]}/{printmap[row][2][1]}\{printmap[row][3][3]}/{printmap[row][4][1]}\{printmap[row][5][3]}/{printmap[row][6][1]}\{printmap[row][7][3]}/{printmap[row][8][1]}\ \n"
+        star_string += f"  \{printmap[row][1][4]}/{printmap[row][2][2]}\{printmap[row][3][4]}/{printmap[row][4][2]}\{printmap[row][5][4]}/{printmap[row][6][2]}\{printmap[row][7][4]}/{printmap[row][8][2]}\ \n"
+    star_string += f"        \{printmap[row][2][3]}/     \{printmap[row][4][3]}/     \{printmap[row][6][3]}/     \{printmap[row][8][3]}/\n"
+    star_string += f"         \{printmap[row][2][4]}/       \{printmap[row][4][4]}/       \{printmap[row][6][4]}/       \{printmap[row][8][4]}/\n\n"
+    return star_string
+
+
 if __name__ == "__main__":
     try:
         if not sys.argv[1]:
